@@ -161,9 +161,9 @@ end;
 
 begin (* tests *)
   if tests_run then
+    ?|~ "opam depext %s" pkg;
+    ?|~ "opam install %s --deps-only" pkg;
     with_opambuildtest (fun () ->
-        ?|~ "opam depext %s" pkg;
-        ?|~ "opam install %s --deps-only" pkg;
         install ["-v";"-t"];
         ?|~ "opam remove %s -v" pkg)
   else
