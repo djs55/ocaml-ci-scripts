@@ -160,13 +160,13 @@ begin (* Simple installation/removal test *)
 end;
 
 begin (* tests *)
-  if tests_run then
+  if tests_run then begin
+    ?|~ "opam depext %s" pkg;
+    ?|~ "opam install %s --deps-only" pkg;
     with_opambuildtest (fun () ->
-        ?|~ "opam depext %s" pkg;
-        ?|~ "opam install %s --deps-only" pkg;
         install ["-v";"-t"];
         ?|~ "opam remove %s -v" pkg)
-  else
+  end else
     echo "TESTS=false, skipping the test run.";
 end;
 
